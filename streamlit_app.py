@@ -46,12 +46,25 @@ st.markdown(
     """
 )
 
+# Added "Work In Progress" section
+st.write("### Work In Progress")
+st.markdown(
+    """
+    🚧 **Version 2 is coming soon!** 🚧
+
+    I'm currently working on improving the address extraction accuracy and adding support for additional document formats, more robust NLP models, and customizations. Stay tuned for the next version of the **Indian Address Parser** with enhanced features and faster processing!
+
+    Your feedback and suggestions are always welcome!
+    """
+)
+
 uploaded_file = st.file_uploader("Upload a PDF file", type=["pdf"])
 manual_text = st.text_area("Or paste text manually:")
 
-if uploaded_file or manual_text:
-    with st.spinner("Extracting addresses..."):
-        extracted_text = extract_text_from_pdf(uploaded_file) if uploaded_file else manual_text
+# Process uploaded PDF file
+if uploaded_file:
+    with st.spinner("Extracting addresses from PDF..."):
+        extracted_text = extract_text_from_pdf(uploaded_file)
         if extracted_text.strip():
             addresses = extract_addresses(extracted_text)
         else:
@@ -65,23 +78,60 @@ if uploaded_file or manual_text:
             st.markdown(
                 f"""
                 **{idx}. Formatted Address:**
-                ```
+                ``` 
                 {extractor.format_address(addr)}
                 ```
                 **Confidence Score:** {addr.confidence_score:.2f}
                 **Region:** {addr.region}
                 **Components:**
-                ```
+                ``` 
                 {addr.components}
                 ```
                 ---
                 """
             )
-        
+
         formatted_addresses = [extractor.format_address(addr) for addr in addresses]
         st.download_button("📥 Download Addresses", data="\n".join(formatted_addresses), file_name="addresses.txt")
     else:
         st.warning("⚠️ No valid Indian addresses found.")
+
+# Process pasted text with a submit button
+if manual_text:
+    submit_button = st.button("Submit")
+    if submit_button:
+        with st.spinner("Extracting addresses from text..."):
+            extracted_text = manual_text
+            if extracted_text.strip():
+                addresses = extract_addresses(extracted_text)
+            else:
+                addresses = []
+
+        if addresses:
+            st.success(f"✅ Extracted {len(addresses)} addresses successfully!")
+            st.write("### Extracted Addresses")
+
+            for idx, addr in enumerate(addresses, 1):
+                st.markdown(
+                    f"""
+                    **{idx}. Formatted Address:**
+                    ``` 
+                    {extractor.format_address(addr)}
+                    ```
+                    **Confidence Score:** {addr.confidence_score:.2f}
+                    **Region:** {addr.region}
+                    **Components:**
+                    ``` 
+                    {addr.components}
+                    ```
+                    ---
+                    """
+                )
+
+            formatted_addresses = [extractor.format_address(addr) for addr in addresses]
+            st.download_button("📥 Download Addresses", data="\n".join(formatted_addresses), file_name="addresses.txt")
+        else:
+            st.warning("⚠️ No valid Indian addresses found.")
 
 # Contact information
 st.write("### Contact")
