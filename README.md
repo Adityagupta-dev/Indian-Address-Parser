@@ -62,6 +62,9 @@ Contributions are welcome! If you find any issues or have suggestions, feel free
 For any queries, feel free to connect with me on **[LinkedIn](https://www.linkedin.com/in/aditya-gupta-062478250/)**.
 .
 
+📜 License
+
+This project is licensed under the MIT License. You are free to use, modify, and distribute it, but attribution is required. See the LICENSE file for more details.
 ---
 ⭐ **If you find this project useful, don't forget to star the repo!** ⭐
 
