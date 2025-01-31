@@ -46,17 +46,7 @@ st.markdown(
     """
 )
 
-# Added "Work In Progress" section
-st.write("### Work In Progress")
-st.markdown(
-    """
-    🚧 **Version 2 is coming soon!** 🚧
 
-    I'm currently working on improving the address extraction accuracy and adding support for additional document formats, more robust NLP models, and customizations. Stay tuned for the next version of the **Indian Address Parser** with enhanced features and faster processing!
-
-    Your feedback and suggestions are always welcome!
-    """
-)
 
 uploaded_file = st.file_uploader("Upload a PDF file", type=["pdf"])
 manual_text = st.text_area("Or paste text manually:")
@@ -132,6 +122,18 @@ if manual_text:
             st.download_button("📥 Download Addresses", data="\n".join(formatted_addresses), file_name="addresses.txt")
         else:
             st.warning("⚠️ No valid Indian addresses found.")
+
+# Added "Work In Progress" section
+st.write("### Work In Progress")
+st.markdown(
+    """
+    🚧 **Version 2 is coming soon!** 🚧
+
+    I'm currently working on improving the address extraction accuracy and adding support for additional document formats, more robust NLP models, and customizations. Stay tuned for the next version of the **Indian Address Parser** with enhanced features and faster processing!
+
+    Your feedback and suggestions are always welcome!
+    """
+)
 
 # Contact information
 st.write("### Contact")
