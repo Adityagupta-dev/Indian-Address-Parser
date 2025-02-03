@@ -42,7 +42,7 @@ To use this project locally, follow these steps:
 
 ### 2️⃣ Enter Text Manually
 - Paste text containing addresses in the text box.
-- Click **Submit** to extract and analyze the addresses.
+- The extracted addresses will be displayed along with confidence scores and structured components.
 
 ### 3️⃣ Download Extracted Addresses
 - The extracted addresses can be downloaded as a structured text file.
